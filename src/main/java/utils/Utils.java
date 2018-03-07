@@ -23,13 +23,6 @@ public class Utils {
         return string == null || string.length() == 0;
     }
 
-    public static Set<String> nodeListToMap(final NodeList list, final List<String> names){
-        final Set<String> result = new HashSet<>();
-        final int size = list.getLength();
-
-        return result;
-    }
-
     public static List<Node> getNodesByName(NodeList list, String name){
         if (list == null || list.getLength() == 0) return Collections.emptyList();
         int size = list.getLength();
@@ -75,7 +68,7 @@ public class Utils {
     }
 
     public static Map<String, Date> sortAndCut(Map<String, Date> map, int limit) {
-        if (map == null || map.size() == 0) return map;
+        if (map == null || map.size() == 0) return Collections.emptyMap();
 
         return map.entrySet().stream()
                 .sorted(Map.Entry.<String, Date> comparingByValue().reversed())
