@@ -1,6 +1,7 @@
 package service;
 
 import org.jsoup.nodes.Document;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -28,11 +29,16 @@ class ServiceTest {
         return urlMap;
     }
 
+    @BeforeAll
+    static void init(){
+        service = new ServiceImpl();
+    }
+
     @DisplayName("Testing <p>")
     @ParameterizedTest
     @ValueSource(strings = {ABENDBLATT})
-    void testP(String name){
-
+    void testP(String name) throws Exception {
+        initMap(name);
         Set<String> urls = urlMap.get(name);
         urls.stream().forEach(e -> {
             Document document = new Document(e);
@@ -42,7 +48,8 @@ class ServiceTest {
     @DisplayName("Testing <h1>")
     @ParameterizedTest
     @ValueSource(strings = {ABENDBLATT})
-    void testH(String name){
+    void testH(String name) throws Exception {
+        initMap(name);
         Set<String> urls = urlMap.get(name);
         urls.stream().forEach(e -> {
             Document document = new Document(e);
@@ -52,7 +59,8 @@ class ServiceTest {
     @DisplayName("Testing <p>")
     @ParameterizedTest
     @ValueSource(strings = {ABENDBLATT})
-    void testPdisallowed(String name){
+    void testPdisallowed(String name) throws Exception {
+        initMap(name);
         Set<String> urls = urlMap.get(name);
         urls.stream().forEach(e -> {
             Document document = new Document(e);
